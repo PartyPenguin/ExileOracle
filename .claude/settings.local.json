@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.pathofexile.com)",
+      "Bash(npm install:*)",
+      "Bash(where npm:*)",
+      "Bash(cmd.exe /c \"where node\")",
+      "Bash(cmd.exe /c \"where npm\")",
+      "Bash(cmd.exe /c \"where bun\")",
+      "Bash(cmd.exe /c \"where pnpm\")",
+      "Bash(export PATH=\"$PATH:/c/Program Files/nodejs\")",
+      "Bash(timeout 5 node dist/index.js)",
+      "mcp__poe2__get_config",
+      "mcp__poe2__list_stash_tabs",
+      "mcp__poe2__list_characters",
+      "Bash(npx tsc:*)",
+      "mcp__poe2__set_account_name",
+      "Bash(node -e \":*)",
+      "mcp__poe2__set_league",
+      "mcp__poe2__get_stash_items",
+      "mcp__poe2__get_clipboard_item",
+      "Bash(node --input-type=module -e \":*)",
+      "Bash(curl -s -L https://poe.ninja/poe2/economy/vaal/currency)",
+      "mcp__poe2__list_leagues",
+      "mcp__poe2__auto_detect_league",
+      "mcp__poe2__price_check",
+      "mcp__poe2__import_build",
+      "mcp__poe2__snapshot_stash",
+      "mcp__poe2__list_prices",
+      "mcp__poe2__price_check_stash",
+      "Bash(npm run:*)",
+      "mcp__poe2__collect_item",
+      "mcp__poe2__compare_collected_items"
+    ]
+  }
+}
