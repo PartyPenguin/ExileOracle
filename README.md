@@ -31,10 +31,6 @@ npm run build
 
 ## Authentication
 
-ExileOracle supports two authentication methods:
-
-### Option 1: POESESSID (Quick Start)
-
 1. Log in to [pathofexile.com](https://www.pathofexile.com)
 2. Open browser DevTools (F12) → Application → Cookies
 3. Copy the `POESESSID` value
@@ -44,13 +40,6 @@ ExileOracle supports two authentication methods:
    ```
 
 > **Note:** Session IDs expire when you log out or after some time. You'll need to grab a new one periodically.
-
-### Option 2: OAuth 2.1 (Recommended for Long-Term Use)
-
-1. Register your application with GGG by emailing `oauth@grindinggear.com`
-2. Use the `start_oauth` tool to begin the PKCE authorization flow
-3. Complete the login in your browser
-4. Tokens are saved and refreshed automatically
 
 ## Configuration
 
@@ -109,7 +98,6 @@ Add to your `.claude/settings.json`:
 | `set_league` | Set the active league |
 | `set_session_id` | Set POESESSID for authentication |
 | `set_account_name` | Set your account name (include discriminator) |
-| `start_oauth` | Begin OAuth 2.1 login flow |
 
 ### Stash
 | Tool | Description |
