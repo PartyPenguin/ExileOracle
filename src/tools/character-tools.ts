@@ -10,13 +10,11 @@ export function registerCharacterTools(server: McpServer): void {
     async () => {
       try {
         const characters = await listCharacters();
+        const text = characters.length > 0
+          ? JSON.stringify(characters, null, 2)
+          : "No POE2 characters found. Note: With session auth (POESESSID), character listing has limited POE2 support. Use clipboard (Ctrl+C items in-game) and build import for item analysis instead.";
         return {
-          content: [
-            {
-              type: "text" as const,
-              text: JSON.stringify(characters, null, 2),
-            },
-          ],
+          content: [{ type: "text" as const, text }],
         };
       } catch (err) {
         return {

@@ -25,7 +25,9 @@ export async function listCharacters(): Promise<Character[]> {
     return (response.characters ?? []).filter((c) => c.realm === "poe2");
   }
 
-  // Session-based: use character-window endpoint
+  // Session-based: use legacy character-window endpoint (POE1 domain)
+  // Note: This only returns POE1 characters. POE2 characters require OAuth.
+  // For POE2 item analysis, use clipboard (Ctrl+C) and build import instead.
   const config = getConfig();
   if (!config.accountName) {
     throw new Error("Account name required for session auth. Use set_account_name tool first.");
@@ -33,18 +35,16 @@ export async function listCharacters(): Promise<Character[]> {
 
   const { status, data } = await poeSessionFetch("/character-window/get-characters", {
     accountName: config.accountName,
-    realm: config.realm,
   });
 
   if (status !== 200) {
     throw new Error(`Failed to list characters (${status}): ${JSON.stringify(data)}`);
   }
 
-  const characters = data as Array<Character & { league?: string }>;
+  const characters = data as Character[];
   if (!Array.isArray(characters)) return [];
 
-  // The session endpoint returns ALL characters across POE1 and POE2.
-  // POE1-only classes let us filter them out.
+  // Filter out POE1-only classes
   const poe1OnlyClasses = new Set([
     "marauder", "duelist", "templar", "shadow", "scion",
     "juggernaut", "berserker", "chieftain",
@@ -79,14 +79,14 @@ export async function getCharacterEquipment(characterName: string): Promise<Char
     };
   }
 
-  // Session-based: use character-window endpoint
+  // Session-based: use legacy character-window endpoint
+  // Note: Only works for POE1 characters. POE2 equipment requires OAuth.
   if (!config.accountName) {
     throw new Error("Account name required for session auth. Use set_account_name tool first.");
   }
 
   const { status, data } = await poeSessionFetch("/character-window/get-items", {
     accountName: config.accountName,
-    realm: config.realm,
     character: characterName,
   });
 
