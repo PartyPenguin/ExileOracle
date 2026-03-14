@@ -40,8 +40,22 @@ export async function listCharacters(): Promise<Character[]> {
     throw new Error(`Failed to list characters (${status}): ${JSON.stringify(data)}`);
   }
 
-  const characters = data as Character[];
-  return Array.isArray(characters) ? characters : [];
+  const characters = data as Array<Character & { league?: string }>;
+  if (!Array.isArray(characters)) return [];
+
+  // The session endpoint returns ALL characters across POE1 and POE2.
+  // POE1-only classes let us filter them out.
+  const poe1OnlyClasses = new Set([
+    "marauder", "duelist", "templar", "shadow", "scion",
+    "juggernaut", "berserker", "chieftain",
+    "slayer", "gladiator", "champion",
+    "inquisitor", "hierophant", "guardian",
+    "saboteur", "assassin", "trickster",
+    "necromancer", "elementalist", "occultist",
+    "ascendant",
+  ]);
+
+  return characters.filter((c) => !poe1OnlyClasses.has(c.class?.toLowerCase()));
 }
 
 export async function getCharacterEquipment(characterName: string): Promise<CharacterEquipment> {
